@@ -1,0 +1,6 @@
+[[chapter3]]
+== Example ACPI Table Implementation
+
+This chapter covers some system implementation examples.
+
+include::chapter3-ex1.adoc[]

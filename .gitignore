@@ -1,2 +1,4 @@
 /build/*
 /images/*
+/.vscode/*
+.DS_Store

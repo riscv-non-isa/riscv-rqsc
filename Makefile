@@ -13,10 +13,10 @@
 # the Doc Template for RISC-V Extensions.
 
 DOCS := \
-	spec-sample.adoc
+	riscv-rqsc.adoc
 
 DATE ?= $(shell date +%Y-%m-%d)
-VERSION ?= v0.0.0
+VERSION ?= v0.1.0
 REVMARK ?= Draft
 DOCKER_IMG := riscvintl/riscv-docs-base-container-image:latest
 ifneq ($(SKIP_DOCKER),true)
@@ -48,7 +48,6 @@ OPTIONS := --trace \
            --failure-level=ERROR
 REQUIRES := --require=asciidoctor-bibtex \
             --require=asciidoctor-diagram \
-			--require=asciidoctor-lists \
             --require=asciidoctor-mathematical
 
 .PHONY: all build clean build-container build-no-container build-docs

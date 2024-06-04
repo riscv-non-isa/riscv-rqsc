@@ -1,48 +1,232 @@
 [[chapter2]]
-== The Second Chapter
+== The ACPI RQSC Table
 
-. The first item.
+The Capacity and Bandwidth QoS
+controllers in a system are described by the ACPI RQSC indexterm:[RQSC]
+table. The actual register interface is specified in the RISC-V Capacity
+and Bandwidth Controller QoS Register Interface specification cite:[CBQRI].
 
-. The second item.
-+
-.. The first sub item.
+The RQSC table describes the properties of the QoS controllers in the system.
+The table also describes the topological arrangement of the QoS controllers
+and resources in the system. The topology is expressed in terms of the location
+of the resources within the system and the relation between teh QoS Controller
+and the resource it manages.
 
-.. The second sub item.
-+
-[CAUTION]
-====
-A moment of caution is required for this block of text must be read and apreciated for its importance.
-====
+When QoS is enabled, all QoS Controllers must be configured to
+support proper operation.
 
-. Yet another item.
+The table format is described in <<RQSC_TABLE>>.
 
-. Again, an item.
-
-.. A multi-line item.
-+
-This item has multiple lines.
-+
-By multiple lines, this is what we mean.
-+
-Seriously, multiple.
-
-=== An example table
-
-.Nonsensical table
-[cols="^1,^1,^1,^1,^3,^3",stripes=even,options="header"]
+.The RQSC Table
+[[RQSC_TABLE]]
+[cols="^2,^1,^1,^3",stripes=even,options="header,unbreakable"]
 |===
-4+|Letters _and_ bits {set:cellbgcolor:green} 2+|A much longer area
-|L|R|W|X|Quarter 1|Quarter 2
-|{set:cellbgcolor:!} 0|0|0|0 2+|Rows alternate colors
-|0|0|0|1|Thing 1|Thing 2
-|1|0|0|0|Thing 3|Thing 4
-|1|1|1|1 2+|Span Thing 1 and 2
+|Field {set:cellbgcolor:green}|Byte Length|Byte Offset|Description
+4+<|{set:cellbgcolor:!} *Header*
+<|- Signature                       |4  |0  <|'RQSC'. Signature of RISC-V Quality
+                                              of Service Controllers Table
+<|- Length                          |4  |4  <|Length of the entire RQSC table in bytes.
+<|- Revision                        |1  |8  <|Revision number. Current Value: 1
+<|- Checksum                        |1  |9  <|Entire table must sum to zero
+<|- OEMID                           |6  |10 <|OEMID
+<|- OEM Table ID                    |8  |16 <|For Quality of Service Controllers Table,
+                                              the table ID is the manufacturer model ID
+<|- OEM Revision                    |4  |24 <|OEM revision of Quality of Service
+                                              Controllers Table for supplied OEM Table ID
+<|- Creator ID                      |4  |28 <|Vendor ID of utility that created the table
+<|- Creator Revision                |4  |32 <|Revision of utility that created the table
+4+<|*Body*
+<|- Number of QoS Controllers       |4  |36 <|The number of system level QoS controller
+                                              structures that immediately follow.
+<|- QoS Controller Structure [n]    |-  |40 <|List of Quality of Service Controller
+                                              Structures. See <<QSC_TABLE>> table below.
 |===
 
-=== Sub section
+.Quality of Service Controller Structure
+[[QSC_TABLE]]
+[cols="^2,^1,^1,^3",stripes=even,options="header,unbreakable"]
+|===
+|Field {set:cellbgcolor:green}|Byte Length|Byte Offset|Description
+4+<|{set:cellbgcolor:!} *Header*
+<|- Controller Type             |1  |0  <a|Identifies the specific register interface
+                                           that is supported by this controller as
+                                           defined by the RVI CBQRI specification.
 
-Diam donec adipiscing tristique risus indexterm:[risus]. Nisl rhoncus mattis rhoncus urna. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Porta non pulvinar neque laoreet suspendisse interdum consectetur libero id. Massa vitae tortor condimentum lacinia quis vel. Donec ac odio tempor orci. Mi sit amet mauris commodo quis imperdiet massa tincidunt. Quis enim lobortis scelerisque fermentum dui. Lacus viverra vitae congue eu. Sed faucibus turpis in eu mi bibendum neque. Sit amet porttitor eget dolor. Aliquet eget sit amet tellus cras adipiscing enim. Id cursus metus aliquam eleifend mi. Vestibulum lorem sed risus ultricies tristique nulla aliquet.
+                                           - 0 - Capacity
+                                           - 1 - Bandwidth
+                                           - 2 - 0x7F - Reserved
+                                           - 0x80-0xFF - Vendor Specific
+<|- Reserved                    |1  |1  <a|Reserved. Must be 0
+<|- Length                      |2  |2  <a|Length of this specific Quality of Service
+                                           Controller structure in bytes.
+                                           The Length includes all resource structures
+                                           for this specific controller.
+<|- Register Interface Address  |12 |4 <a|Register Buffer describing the starting
+                                           address of the Quality of Service register
+                                           interface as defined by the RVI CBQRI
+                                           specification as an ACPI GAS structure.
+<|- RCID Count                  |4  |16 <a|Non zero number indicates that the controller
+                                           supports allocation capability and the number
+                                           of Resource Control IDs (RCID) supported by the
+                                           controller.                                      +
+                                                                                            +
+                                           If 0, then no allocation control is available.
+<|- MCID Count                  |4  |20 <a|Non zero number indicates that the controller
+                                            supports usage monitoring capability and
+                                            the number of (Monitoring Control IDs
+                                            (MCID) supported by the controller.             +
+                                                                                            +
+                                            If 0, then no usage monitoring is available.    +
+                                                                                            +
+                                            At least one of RCID Count or MCID Count
+                                            must be non-zero.
+<|- Controller Flags            |2  |24 <a|Controller Specific flags. Refer to
+                                            <<CONTROLLER_FLAGS_TABLE>> for details.
+<|- Number of Resources         |2  |26 <a|Number of Resource structures associated with
+                                            this specific QoS controller.
+<|- Resource Structure [n]      |-  |28 <a|List of Fixed size Resource Structures asssociated with
+                                            this specific QoS controller.
+|===
 
-=== Yet another subsection
+.Controller Flags
+[[CONTROLLER_FLAGS_TABLE]]
+[cols="^1,^3",stripes=even,options="header,unbreakable"]
+|===
+|Bit {set:cellbgcolor:green}|Description
+<|{set:cellbgcolor:!}0 <a|When set, indicates the controller supports zero (0) reservations/allocations.
+<|1-7 <a|Reserved for future use.
+<|8-15 <a|Vendor Specific.
+|===
 
-Quam lacus suspendisse faucibus interdum posuere lorem ipsum. Nulla aliquet enim tortor at auctor urna nunc id cursus. Massa massa ultricies mi quis hendrerit dolor magna. Integer enim neque volutpat ac tincidunt. Dolor magna eget est lorem ipsum dolor. Urna neque viverra justo nec. Neque gravida in fermentum et. Fringilla ut morbi tincidunt augue interdum velit euismod. Dolor sit amet consectetur adipiscing elit. Eu facilisis sed odio morbi. In cursus turpis massa tincidunt dui. Orci indexterm:[orci] phasellus egestas tellus rutrum tellus. Semper eget duis at tellus at urna condimentum. Orci porta non pulvinar neque laoreet suspendisse interdum consectetur.
+.Resource Structure
+[[QSCR_TABLE]]
+[cols="^2,^1,^1,^3",stripes=even,options="header,unbreakable"]
+|===
+|Field {set:cellbgcolor:green}|Byte Length|Byte Offset|Description
+4+<|{set:cellbgcolor:!} *Header*
+<|- Resource Type               |1  |0 <a|
+                                            - 0 - Cache
+                                            - 1 - Memory
+                                            - 2 - 0x7F - Reserved
+                                            - 0x80 - 0xFF - Vendor Specific
+<|- Length                      |1  |1 <a| Length of this specific Resource Structure.
+                                            Length includes the Resource Specific
+                                            Data bytes as well. If length is set to 16,
+                                            then, it indicates there is no resource
+                                            specific data available for this structure.
+<|- Resource Flags              |2  |2 <a|Resource Type Specific flags. Refer to
+                                            <<RESOURCE_FLAGS_TABLE>> for details.
+<|- Resource ID 1               |8  |4 <a|Depends on the Resource Type field. Refer
+                                            to <<RESOURCE_ID_1_TABLE>> for details.
+<|- Resource ID 2               |4  |12 <a|Depends on the Resource Type Field. Refer to
+                                            <<RESOURCE_ID_2_TABLE>> for details.
+<|- Resource Specific Data      |-  |16 <a|Depends on the Resource Type Field. Refer
+                                            to <<RESOURCE_DATA_TABLE>> for details.
+|===
+
+.Resource Flags
+[[RESOURCE_FLAGS_TABLE]]
+[cols="^1,^3",stripes=even,options="header,unbreakable"]
+|===
+|Bit {set:cellbgcolor:green}|Description
+2+<|{set:cellbgcolor:!} *Resource Type [0 - Cache]*
+<|0-7                                   <a|Reserved for future use.
+<|8-15                                  <a|Vendor Specific.
+2+<|*Resource Type [1 - Memory]*
+<|0                                     <a|Raw Bandwidth per bandwidth block is valid
+<|1-7                                   <a|Reserved for future use.
+<|8-15                                  <a|Vendor Specific.
+2+<|*All Other Resource Types*
+<|0-7                                   <a|Reserved for future use.
+<|8-15                                  <a|Vendor Specific.
+|===
+
+.Resource ID 1
+[[RESOURCE_ID_1_TABLE]]
+[cols="^2,^1,^1,^3",stripes=even,options="header,unbreakable"]
+|===
+|Field {set:cellbgcolor:green}|Byte Length|Byte Offset|Description
+4+<|{set:cellbgcolor:!} *All Unspecified Resource Types*
+<| Resource ID                 |8   |0  <a|Reserved.
+4+<|*Resource Type [0 - Cache]*
+<| Cache ID                    |4   |0   <a|Unique Cache ID from the PPTT table’s
+                                            Cache Type Structure (Table 5.159 in
+                                            ACPI Specification 6.5) that this
+                                            controller is associated with.
+<| Reserved                    |4   |4  <a|Reserved.
+4+<|*Resource Type [1 - Memory]*
+<| Proximity Domain            |4   |0   <a|Proximity domain from the SRAT table
+                                            that this specific controller is
+                                            associated with. If the SRAT
+                                            table is not implemented, then this value
+                                            shall be 0 indicating a UMA memory
+                                            configuration.
+<| Reserved                    |4   |4  <a|Reserved.
+|===
+
+.Resource ID 2
+[[RESOURCE_ID_2_TABLE]]
+[cols="^2,^1,^1,^3",stripes=even,options="header,unbreakable"]
+|===
+|Field {set:cellbgcolor:green}|Byte Length|Byte Offset|Description
+4+<|{set:cellbgcolor:!}  *All Unspecified Resource Types*
+<| Resource ID 2               |4   |0  <a|Reserved.
+|===
+
+
+.Resource Specific Data
+[[RESOURCE_DATA_TABLE]]
+[cols="^2,^1,^1,^3",stripes=even,options="header,unbreakable"]
+|===
+|Field {set:cellbgcolor:green}|Byte Length|Byte Offset|Description
+4+<|{set:cellbgcolor:!} *All Unspecified Resource Types*
+4+<a|
+[NOTE]
+If a resource type is not identified below, then there is no Resource Specific Data
+defined for that resource type and the Length of the Resource Structure must be
+set to 16.
+4+<|*Resource Type [1 - Memory]*
+<| Raw Bandwidth per Block     |4   |0  <a|Indicates the actual raw bandwidth that each
+                                            unit of bandwidth block corresponds to in
+                                            bytes/seconds for this specific Resource.
+|===
+
+
+
+=== RISC-V Memory Bandwidth QoS Controllers
+==== Raw Bandwidth Per Block Calculation
+The Memory Bandwidth QoS controllers provide a generic means to control bandwidth
+in terms of blocks. The user may be interested in knowing exactly how much raw
+bandwidth does a block entail such that they can make informed decisions on how to
+size the per RCID bandwidth block configuration.
+
+Given memory bandwidth will vary based on the type of memory connected to the system,
+the speed at which they are configured, and the number of channels, interleaving
+conditions etc., System BIOS or M-mode FW calculates the amount of Raw Bandwidth
+pertaining to each controller's block unit. This is done by calculating the total
+bandwidth of all memory controllers within a region (UMA/NUMA node) and then
+dividing the total bandwidth by the number of blocks each controller supports.
+
+
+==== UMA vs. NUMA
+A system memory may be configured in UMA (Uniform Memory) mode where all memory
+channels in the system across different memory controllers are treated as a
+unified memory. In this case, memory traffic is equally shared by all controllers
+as the memory addressing is interleaved among all the memory channels.
+In this case, typically the SRAT table will either not have any memory
+described or it may have memory controllers described with all of them
+having the same proximity domain.
+
+In modern systems, the system memory may also be configured in NUMA
+(Non-Uniform Memory) mode where specific memory controllers are grouped together
+into separate domains and memory addresses are segregrated among different groups
+of memory channels managed by specific memory controllers. Within a given NUMA
+node however, the traffic is equally shared by all controllers as the memory
+addressing is interleaved among all channels that are part of the specific
+NUMA node. In this case, typically, the SRAT table will have the memory
+controllers described with different proximity domains identifying the
+different NUMA nodes they are associated with.
+
+In either case, if there are more than one memory bandwidth QoS controller
+specified with the same proximity domain, the bandwidth reservation
+configuration settings must be set identical in all the shared QoS controllers.

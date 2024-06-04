@@ -1,12 +1,13 @@
-= RISC-V Example Specification Document (Zexmpl)
-Authors: Author 1, Author 2
-include::../docs-resources/global-config.adoc[]
-:docgroup: RISC-V Task Group
-:description: RISC-V Example Specification Document (Zexmpl)
-:revdate: 1/2023
+= RISC-V Quality of Service Controllers Table (RQSC) ACPI Specification
+:docgroup: RISC-V Platform Runtime Services Task Group
+:description: RISC-V Quality of Service Controllers Table (RQSC) ACPI Specification
+:company: RISC-V.org
+:revdate: 4/2024
 :revnumber: 1.0
 :revremark: This document is under development. Expect potential changes. Visit http://riscv.org/spec-state for further details.
 :revinfo:
+:url-riscv: http://riscv.org
+:doctype: book
 :preface-title: Preamble
 :colophon:
 :appendix-caption: Appendix
@@ -17,11 +18,11 @@ include::../docs-resources/global-config.adoc[]
 :experimental:
 :reproducible:
 //:WaveDromEditorApp: app/wavedrom-editor.app
-:imagesoutdir: images
-//:srcdir: src
-:bibtex-file: src/example.bib
-:bibtex-order: alphabetical
-:bibtex-style: apa
+:imagesoutdir: ../build/images
+:srcdir: src
+:bibtex-file: {srcdir}/riscv_rqsc.bib
+:bibtex-order: appearance
+:bibtex-style: ieee
 :icons: font
 :lang: en
 :listing-caption: Listing
@@ -38,24 +39,12 @@ endif::[]
 :footnote:
 :xrefstyle: short
 
-[preface]
-== List of figures
-list-of::image[hide_empty_section=true, enhanced_rendering=true]
-
-[preface]
-== List of tables
-list-of::table[hide_empty_section=true, enhanced_rendering=true]
-
-[preface]
-== List of listings
-list-of::listing[hide_empty_section=true, enhanced_rendering=true]
-
 [WARNING]
 .This document is in the link:http://riscv.org/spec-state[Development state]
 ====
-Expect potential changes. This draft specification is likely to evolve before
-it is accepted as a standard. Implementations based on this draft
-may not conform to the future standard.
+Assume everything can change. This draft specification will change before being accepted
+as standard, so implementations made to this draft specification will likely not conform
+to the future standard.
 ====
 
 [preface]
@@ -72,6 +61,7 @@ include::contributors.adoc[]
 
 include::intro.adoc[]
 include::chapter2.adoc[]
+include::chapter3.adoc[]
 
 // The index must precede the bibliography
 include::index.adoc[]
