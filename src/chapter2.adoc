@@ -104,23 +104,33 @@ The table format is described in <<RQSC_TABLE>>.
 |===
 |Field {set:cellbgcolor:green}|Byte Length|Byte Offset|Description
 4+<|{set:cellbgcolor:!} *Header*
-<|- Resource Type               |1  |0 <a|
+<|- Resource Type               |1  |0  <a|
                                             - 0 - Cache
                                             - 1 - Memory
                                             - 2 - 0x7F - Reserved
                                             - 0x80 - 0xFF - Vendor Specific
-<|- Length                      |1  |1 <a| Length of this specific Resource Structure.
+<|- Reserved                    |1  |1  <a|Reserved. Must be 0
+<|- Length                      |2  |2  <a| Length of this specific Resource Structure.
                                             Length includes the Resource Specific
-                                            Data bytes as well. If length is set to 16,
+                                            Data bytes as well. If length is set to 20,
                                             then, it indicates there is no resource
                                             specific data available for this structure.
-<|- Resource Flags              |2  |2 <a|Resource Type Specific flags. Refer to
+<|- Resource Flags              |2  |4  <a|Resource Type Specific flags. Refer to
                                             <<RESOURCE_FLAGS_TABLE>> for details.
-<|- Resource ID 1               |8  |4 <a|Depends on the Resource Type field. Refer
+<|- Reserved                    |1  |6  <a|Reserved. Must be 0
+<|- Resource ID Type            |1  |7  <a|Type of the Resource ID described by
+                                            Resource ID 1 and Resource ID 2 fields.
+
+                                            - 0 - Cache ID
+                                            - 1 - Proximity Domain (Memory)
+                                            - 2 - ACPI Device
+                                            - 3 - 0x7F - Reserved for future use
+                                            - 0x80 - 0xFF - Vendor Specific
+<|- Resource ID 1               |8  |8  <a|Depends on the Resource ID Type field. Refer
                                             to <<RESOURCE_ID_1_TABLE>> for details.
-<|- Resource ID 2               |4  |12 <a|Depends on the Resource Type Field. Refer to
+<|- Resource ID 2               |4  |16 <a|Depends on the Resource ID Type Field. Refer to
                                             <<RESOURCE_ID_2_TABLE>> for details.
-<|- Resource Specific Data      |-  |16 <a|Depends on the Resource Type Field. Refer
+<|- Resource Specific Data      |-  |20 <a|Depends on the Resource Type Field. Refer
                                             to <<RESOURCE_DATA_TABLE>> for details.
 |===
 
@@ -146,15 +156,15 @@ The table format is described in <<RQSC_TABLE>>.
 [cols="^2,^1,^1,^3",stripes=even,options="header,unbreakable"]
 |===
 |Field {set:cellbgcolor:green}|Byte Length|Byte Offset|Description
-4+<|{set:cellbgcolor:!} *All Unspecified Resource Types*
-<| Resource ID                 |8   |0  <a|Reserved.
-4+<|*Resource Type [0 - Cache]*
+4+<|{set:cellbgcolor:!} *All Unspecified Resource ID Types*
+<| Resource ID 1               |8   |0  <a|Reserved.
+4+<|*Resource ID Type [0 - Cache]*
 <| Cache ID                    |4   |0   <a|Unique Cache ID from the PPTT table’s
                                             Cache Type Structure (Table 5.159 in
                                             ACPI Specification 6.5) that this
                                             controller is associated with.
 <| Reserved                    |4   |4  <a|Reserved.
-4+<|*Resource Type [1 - Memory]*
+4+<|*Resource ID Type [1 - Proximity Domain (Memory)]*
 <| Proximity Domain            |4   |0   <a|Proximity domain from the SRAT table
                                             that this specific controller is
                                             associated with. If the SRAT
@@ -162,6 +172,9 @@ The table format is described in <<RQSC_TABLE>>.
                                             shall be 0 indicating a UMA memory
                                             configuration.
 <| Reserved                    |4   |4  <a|Reserved.
+4+<|*Resource ID Type [2 - ACPI Device]*
+<| ACPI Hardware ID            |8   |0   <a|_HID value of the ACPI Device
+                                            corresponding to the Resource.
 |===
 
 .Resource ID 2
@@ -169,8 +182,11 @@ The table format is described in <<RQSC_TABLE>>.
 [cols="^2,^1,^1,^3",stripes=even,options="header,unbreakable"]
 |===
 |Field {set:cellbgcolor:green}|Byte Length|Byte Offset|Description
-4+<|{set:cellbgcolor:!}  *All Unspecified Resource Types*
+4+<|{set:cellbgcolor:!}  *All Unspecified Resource ID Types*
 <| Resource ID 2               |4   |0  <a|Reserved.
+4+<|*Resource ID Type [2 - ACPI Device]*
+<| ACPI Unique ID              |4   |0   <a|_UID value of the ACPI Device
+                                            corresponding to the Resource.
 |===
 
 
@@ -184,9 +200,9 @@ The table format is described in <<RQSC_TABLE>>.
 [NOTE]
 If a resource type is not identified below, then there is no Resource Specific Data
 defined for that resource type and the Length of the Resource Structure must be
-set to 16.
+set to 20.
 4+<|*Resource Type [1 - Memory]*
-<| Raw Bandwidth per Block     |4   |0  <a|Indicates the actual raw bandwidth that each
+<| Raw Bandwidth per Block     |8   |0  <a|Indicates the actual raw bandwidth that each
                                             unit of bandwidth block corresponds to in
                                             bytes/seconds for this specific Resource.
 |===
