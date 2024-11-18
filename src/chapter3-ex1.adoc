@@ -86,7 +86,7 @@ Name(\RQSC, Package()
         0x0001,         // Number of Resources
         Package()       // Resource Structure - Cluster 0 L2 Cache
         {
-            0x00,                   // Resource Type
+            0x00,                   // Resource Type (Cache)
             0x0F,                   // Length (16 bytes)
             0x0000,                 // Resource Flags
             0x0000000000000000,     // Resource ID 1 (Cache ID from PPTT)
@@ -112,7 +112,7 @@ Name(\RQSC, Package()
         0x0001,         // Number of Resources
         Package()       // Resource Structure - Cluster 1 L2 Cache
         {
-            0x00,                   // Resource Type
+            0x00,                   // Resource Type (Cache)
             0x0F,                   // Length (16 bytes)
             0x0000,                 // Resource Flags
             0x0000000000000001,     // Resource ID 1 (Cache ID from PPTT)
@@ -138,7 +138,7 @@ Name(\RQSC, Package()
         0x0001,         // Number of Resources
         Package()       // Resource Structure - Shared LLC Cache
         {
-            0x00,                   // Resource Type
+            0x00,                   // Resource Type (Cache)
             0x0F,                   // Length (16 bytes)
             0x0000,                 // Resource Flags
             0x0000000000000002,     // Resource ID 1 (Cache ID from PPTT)
@@ -164,7 +164,7 @@ Name(\RQSC, Package()
         0x0001,         // Number of Resources
         Package()       // Resource Structure - Proximity Domain
         {
-            0x00,                   // Resource Type
+            0x01,                   // Resource Type (Memory)
             0x0F,                   // Length (16 bytes)
             0x0000,                 // Resource Flags
             0x0000000000000000,     // Resource ID 1 (Proximity Domain from SRAT table for this memory)
@@ -190,7 +190,7 @@ Name(\RQSC, Package()
         0x0001,         // Number of Resources
         Package()       // Resource Structure - Proximity Domain
         {
-            0x00,                   // Resource Type
+            0x01,                   // Resource Type (Memory)
             0x0F,                   // Length (16 bytes)
             0x0000,                 // Resource Flags
             0x0000000000000000,     // Resource ID 1 (Proximity Domain from SRAT table for this memory)
@@ -216,7 +216,7 @@ Name(\RQSC, Package()
         0x0001,         // Number of Resources
         Package()       // Resource Structure - Proximity Domain
         {
-            0x00,                   // Resource Type
+            0x01,                   // Resource Type (Memory)
             0x0F,                   // Length (16 bytes)
             0x0000,                 // Resource Flags
             0x0000000000000000,     // Resource ID 1 (Proximity Domain from SRAT table for this memory)
