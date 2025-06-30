@@ -79,13 +79,23 @@ The table format is described in <<RQSC_TABLE>>.
                                            of Resource Control IDs (RCID) supported by the
                                            controller.                                      +
                                                                                             +
-                                           If 0, then no allocation control is available.
+                                           If 0, then no allocation control is available.   +
+                                                                                            +
+                                           OSPM must use the RCID Count field to
+                                           determine the number of Resource Control IDs
+                                           supported by the controller, even if the
+                                           hardware provided count is different.
 <|- MCID Count                  |4  |20 <a|Non zero number indicates that the controller
                                             supports usage monitoring capability and
                                             the number of (Monitoring Control IDs
                                             (MCID) supported by the controller.             +
                                                                                             +
                                             If 0, then no usage monitoring is available.    +
+                                                                                            +
+                                            OSPM must use the MCID Count field to
+                                            determine the number of Resource Control IDs
+                                            supported by the controller, even if the
+                                            hardware provided count is different.           +
                                                                                             +
                                             At least one of RCID Count or MCID Count
                                             must be non-zero.
