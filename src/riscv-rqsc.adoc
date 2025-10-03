@@ -2,8 +2,8 @@
 :docgroup: RISC-V Platform Runtime Services Task Group
 :description: RISC-V Quality of Service Controllers Table (RQSC) ACPI Specification
 :company: RISC-V.org
-:revdate: 4/2024
-:revnumber: 1.0
+:revdate: 9/2025
+:revnumber: 0.6
 :revremark: This document is under development. Expect potential changes. Visit http://riscv.org/spec-state for further details.
 :revinfo:
 :url-riscv: http://riscv.org
