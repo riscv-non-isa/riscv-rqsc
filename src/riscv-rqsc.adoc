@@ -42,8 +42,8 @@ endif::[]
 [WARNING]
 .This document is in the link:http://riscv.org/spec-state[Frozen state]
 ====
-Changes are highly unlikely. A high threshold will be applied, and modifications 
-will only be made in response to critical issues. Any other proposed changes 
+Changes are highly unlikely. A high threshold will be applied, and modifications
+will only be made in response to critical issues. Any other proposed changes
 should be addressed through a follow-on extension.
 ====
 
