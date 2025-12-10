@@ -4,7 +4,7 @@
 :company: RISC-V.org
 :revdate: 9/2025
 :revnumber: 0.9
-:revremark: This document is under development. Expect potential changes. Visit http://riscv.org/spec-state for further details.
+:revremark: Frozen
 :revinfo:
 :url-riscv: http://riscv.org
 :doctype: book
@@ -40,11 +40,11 @@ endif::[]
 :xrefstyle: short
 
 [WARNING]
-.This document is in the link:http://riscv.org/spec-state[Development state]
+.This document is in the link:http://riscv.org/spec-state[Frozen state]
 ====
-Assume everything can change. This draft specification will change before being accepted
-as standard, so implementations made to this draft specification will likely not conform
-to the future standard.
+Changes are highly unlikely. A high threshold will be applied, and modifications
+will only be made in response to critical issues. Any other proposed changes
+should be addressed through a follow-on extension.
 ====
 
 [preface]
