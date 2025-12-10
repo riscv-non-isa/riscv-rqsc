@@ -16,8 +16,8 @@ DOCS := \
 	riscv-rqsc.adoc
 
 DATE ?= $(shell date +%Y-%m-%d)
-VERSION ?= v0.6.0
-REVMARK ?= Draft
+VERSION ?= v0.9.0
+REVMARK ?= Frozen
 DOCKER_IMG := riscvintl/riscv-docs-base-container-image:latest
 ifneq ($(SKIP_DOCKER),true)
 	DOCKER_CMD := docker run --rm -v ${PWD}:/build -w /build \
