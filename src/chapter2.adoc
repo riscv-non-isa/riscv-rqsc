@@ -157,8 +157,8 @@ The structure of the RQSC is described in <<RQSC_TABLE>>.
                                             <<CONTROLLER_FLAGS_TABLE>> for details.
 <|- Number of Resources         |2  |26 <a|Number of Resource structures associated with
                                             this specific QoS controller.
-<|- Resource Structure [n]      |-  |28 <a|List of Fixed size Resource Structures asssociated with
-                                            this specific QoS controller.
+<|- Resource Structure [n]      |-  |28 <a|List of Fixed size Resource Structures associated with
+                                             this specific QoS controller.
 |===
 
 .Controller Flags

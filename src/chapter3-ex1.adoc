@@ -38,7 +38,7 @@ Cluster 1 L2 cache is shared by 4 cores labeled Core 4 to 7.
 Shared LLC (e.g. L3) is shared by all 8 cores.
 Shared LLC is connected to 3 memory controllers labeled 0 to 2. Each Memory Controller
 has 1 DDR Channel. The DDR Memory is configured in UMA mode with same
-proxmity domain for all memory channels.
+proximity domain for all memory channels.
 
 The system implements the following Capacity and Memory Bandwidth QoS controllers.
 
@@ -266,9 +266,9 @@ In the example system above, cluster 0 L2 cache is shared by 4 cores labeled Cor
 Cluster 1 L2 cache is shared by 4 cores labeled Core 4 to 7.
 Shared LLC (e.g. L3) is shared by all 8 cores.
 Shared LLC is connected to 4 memory controllers labeled 0 to 3. Each Memory Controller
-has 1 DDR Channel. The DDR Memory is configured in NUMA mode with same
-2 proxmity domains where memory controllers 0 and 1 serve cores 0 to 3 and memory controllers
-2 adn 3 serve cores 4 to 7.
+has 1 DDR Channel. The DDR Memory is configured in NUMA mode with 2 proximity domains
+where memory controllers 0 and 1 serve cores 0 to 3 and memory controllers
+2 and 3 serve cores 4 to 7.
 
 When configuring the QoS parameters for the memory QoS controllers, QoS controllers of
 memory controllers 0 and 1 must be configured with the same parameters and QoS controllers of
