@@ -234,7 +234,7 @@ The structure of the RQSC is described in <<RQSC_TABLE>>.
 |Field {set:cellbgcolor:green}|Byte Length|Byte Offset|Description
 4+<|{set:cellbgcolor:!} *All Unspecified Resource ID Types*
 <| Resource ID 1               |8   |0  <a|Reserved.
-4+<|*Resource ID Type [0 - Cache]*
+4+<|*Resource ID Type [0 - Processor Cache]*
 <| Cache ID                    |4   |0   <a|Unique Cache ID from the PPTT table’s
                                             Cache Type Structure (Table 5.159 in
                                             ACPI Specification 6.5) that this
@@ -248,7 +248,7 @@ The structure of the RQSC is described in <<RQSC_TABLE>>.
                                             shall be 0 indicating a UMA memory
                                             configuration.
 <| Reserved                    |4   |4  <a|Reserved.
-4+<|*Resource ID Type [2 - Memory Side Cache]*
+4+<|*Resource ID Type [2 - Memory-Side Cache]*
 <| Proximity Domain            |4   |0   <a|Proximity domain from the SRAT table's
                                             Memory Affinity Structure the resource is
                                             associated with. If the SRAT
@@ -317,7 +317,7 @@ bandwidth of all memory controllers within a memory region (proximity domain) an
 dividing the total bandwidth by the number of bandwidth blocks each controller supports.
 
 
-==== Shared Resource Configuration
+=== Shared Resource Configuration
 In many system designs, a single logical resource may be managed by multiple
 QoS controllers. This occurs when the resource is physically distributed across
 multiple components, or when redundant controllers provide access to the same
@@ -330,7 +330,7 @@ The resource association information provided in the RQSC table enables software
 to identify which controllers share responsibility for a common resource and
 must therefore maintain synchronized configurations.
 
-===== Example: Memory Bandwidth Controllers in UMA and NUMA Configurations
+==== Example: Memory Bandwidth Controllers in UMA and NUMA Configurations
 System memory can be configured in one of two modes:
 
 * **UMA (Uniform Memory Access)**: All memory channels across different
