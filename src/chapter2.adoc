@@ -232,9 +232,7 @@ The structure of the RQSC is described in <<RQSC_TABLE>>.
 [cols="^2,^1,^1,^3",stripes=even,options="header,unbreakable"]
 |===
 |Field {set:cellbgcolor:green}|Byte Length|Byte Offset|Description
-4+<|{set:cellbgcolor:!} *All Unspecified Resource ID Types*
-<| Resource ID 1               |8   |0  <a|Reserved.
-4+<|*Resource ID Type [0 - Processor Cache]*
+4+<|{set:cellbgcolor:!} *Resource ID Type [0 - Processor Cache]*
 <| Cache ID                    |4   |0   <a|Unique Cache ID from the PPTT table’s
                                             Cache Type Structure (Table 5.159 in
                                             ACPI Specification 6.5) that this
@@ -255,11 +253,7 @@ The structure of the RQSC is described in <<RQSC_TABLE>>.
                                             table is not implemented, then this value
                                             shall be 0 indicating a UMA memory
                                             configuration.
-<| Cache Level                 |4   |4   <a|The Cache Level of the Memory Side Cache
-                                            as identified by bits [7:4] of Cache
-                                            Attributes structure from the corresponding
-                                            Memory Side Cache Information Structure
-                                            from HMAT.
+<| Reserved                    |4   |4  <a|Reserved.
 4+<|*Resource ID Type [3 - ACPI Device]*
 <| ACPI Hardware ID            |8   |0   <a|_HID value of the ACPI Device
                                             corresponding to the Resource.
@@ -268,6 +262,8 @@ The structure of the RQSC is described in <<RQSC_TABLE>>.
                                             of the resource that this controller
                                             is associated with.
 <| Reserved                    |4   |4  <a|Reserved.
+4+<|*All Unspecified Resource ID Types*
+<| Resource ID 1               |8   |0  <a|Reserved.
 |===
 
 .Resource ID 2
@@ -275,11 +271,17 @@ The structure of the RQSC is described in <<RQSC_TABLE>>.
 [cols="^2,^1,^1,^3",stripes=even,options="header,unbreakable"]
 |===
 |Field {set:cellbgcolor:green}|Byte Length|Byte Offset|Description
-4+<|{set:cellbgcolor:!}  *All Unspecified Resource ID Types*
-<| Resource ID 2               |4   |0  <a|Reserved.
-4+<|*Resource ID Type [2 - ACPI Device]*
+4+<|{set:cellbgcolor:!}  *Resource ID Type [2 - Memory-Side Cache]*
+<| Cache Level                 |4   |4   <a|The Cache Level of the Memory Side Cache
+                                            as identified by bits [7:4] of Cache
+                                            Attributes structure from the corresponding
+                                            Memory Side Cache Information Structure
+                                            from HMAT.
+4+<|*Resource ID Type [3 - ACPI Device]*
 <| ACPI Unique ID              |4   |0   <a|_UID value of the ACPI Device
                                             corresponding to the Resource.
+4+<|*All Unspecified Resource ID Types*
+<| Resource ID 2               |4   |0  <a|Reserved.
 |===
 
 
