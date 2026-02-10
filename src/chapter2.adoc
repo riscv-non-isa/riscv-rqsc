@@ -22,11 +22,12 @@ The following diagram illustrates the various components of the RQSC table. The
 main RQSC table is the root of the table hierarchy. The RQSC table contains among
 other typical ACPI table fields, the count and the list of QoS Controller Structures.
 Each QoS Controller Structure describes the properties of a QoS Controller and contains
-one or more Resource Structures. Each Resource Structure describes the properties of the
-specific resource the QoS Controller is associated with. It is possible for a QoS
-Controller to be associated with multiple resources and is implementation specific.
-As such exposing this information in the RQSC table is useful for the use to be presented
-with sufficient information to make an informed decision on how to configure the QoS.
+one or more Resource Structures.
+
+Each Resource Structure defines the properties of the resource with which the QoS
+Controller is associated. A QoS Controller may be associated with multiple resources.
+The specific resource associations are implementation-defined. The RQSC table exposes
+this information to enable software to determine the appropriate QoS configuration.
 
 .RQSC Table Components
 [[RQSC_TABLE_COMPONENTS_FIGURE]]
@@ -44,7 +45,7 @@ with sufficient information to make an informed decision on how to configure the
 |   |                                                 |                |
 |   | +---------------+      +---------------+        |                |
 |   | |  Resource     |      |  Resource     |        |                |
-|   | |   Structure 0 |  . . |   Structure n |        |                |
+|   | |   Structure 0 |  . . |   Structure m |        |                |
 |   | |               |      |               |        |                |
 |   | |               |      |               |        |                |
 |   | +---------------+      +---------------+        |                |

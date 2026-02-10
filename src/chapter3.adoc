@@ -4,3 +4,4 @@
 This chapter covers some system implementation examples.
 
 include::chapter3-ex1.adoc[]
+include::chapter3-ex2.adoc[]
