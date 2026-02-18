@@ -33,11 +33,11 @@ The diagram below shows a model of the SoC described in this example.
 
 ----
 
-In the example system above, cluster 0 L2 cache is shared by 4 cores labeled Core 0 to 3.
+In the example system above, Cluster 0 L2 cache is shared by 4 cores labeled Core 0 to 3.
 Cluster 1 L2 cache is shared by 4 cores labeled Core 4 to 7.
 Shared LLC (e.g. L3) is shared by all 8 cores.
 Shared LLC is connected to 3 memory controllers labeled 0 to 2. Each Memory Controller
-has 1 DDR Channel. The DDR Memory is configured in UMA mode with same
+has 1 DDR Channel. The DDR Memory is configured in UMA mode with the same
 proximity domain for all memory channels.
 
 The system implements the following Capacity and Memory Bandwidth QoS controllers.
