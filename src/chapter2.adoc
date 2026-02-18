@@ -109,10 +109,10 @@ The structure of the RQSC is described in <<RQSC_TABLE>>.
                                            - 2-0x7F - Reserved
                                            - 0x80-0xFF - Designated for Vendor specific use
 <|- Reserved                    |1  |1  <a|Reserved. Must be 0
-<|- Length                      |2  |2  <a|Length of this specific Quality of Service
+<|- Length                      |2  |2  <a|Length of the Quality of Service
                                            Controller structure in bytes.
                                            The Length includes all resource structures
-                                           for this specific controller.
+                                           for this controller.
 <|- Register Interface Address  |12 |4 <a|Contains the processor-relative base address,
                                            represented in Generic Address Structure (GAS)
                                            format, of the controller's register space.
