@@ -7,29 +7,29 @@ The diagram below shows a model of the SoC described in this example.
 [ditaa, "single-socket-system-example-1"]
 ----
 
-+------------+  +------------+  +------------+  +------------+    +------------+  +------------+  +------------+  +------------+
-|            |  |            |  |            |  |            |    |            |  |            |  |            |  |            |
-|   Core 0   |  |   Core 1   |  |   Core 2   |  |   Core 3   |    |   Core 4   |  |   Core 5   |  |   Core 6   |  |   Core 7   |
-|            |  |            |  |            |  |            |    |            |  |            |  |            |  |            |
-+------------+  +------------+  +------------+  +------------+    +------------+  +------------+  +------------+  +------------+
++--------+  +--------+  +--------+  +--------+    +--------+  +--------+  +--------+  +--------+
+|        |  |        |  |        |  |        |    |        |  |        |  |        |  |        |
+| Core 0 |  | Core 1 |  | Core 2 |  | Core 3 |    | Core 4 |  | Core 5 |  | Core 6 |  | Core 7 |
+|        |  |        |  |        |  |        |    |        |  |        |  |        |  |        |
++--------+  +--------+  +--------+  +--------+    +--------+  +--------+  +--------+  +--------+
 
-+------------------------------------------------------------+    +------------------------------------------------------------+
-|                                                            |    |                                                            |
-|          Cluster 0 L2 Cache (Shared by C0 to C3)           |    |          Cluster 1 L2 Cache (Shared by C4 to C7)           |
-|                                                            |    |                                                            |
-+------------------------------------------------------------+    +------------------------------------------------------------+
++--------------------------------------------+    +--------------------------------------------+
+|                                            |    |                                            |
+|  Cluster 0 L2 Cache (Shared by C0 to C3)   |    |  Cluster 1 L2 Cache (Shared by C4 to C7)   |
+|                                            |    |                                            |
++--------------------------------------------+    +--------------------------------------------+
 
-+------------------------------------------------------------------------------------------------------------------------------+
-|                                                                                                                              |
-|                                                Shared LLC (Shared by 8 Cores)                                                |
-|                                                                                                                              |
-+------------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------+
+|                                                                                              |
+|                             Shared LLC (Shared by 8 Cores)                                   |
+|                                                                                              |
++----------------------------------------------------------------------------------------------+
 
-+-------------------------------------+      +------------------------------------+      +-------------------------------------+
-|                                     |      |                                    |      |                                     |
-|         Memory Controller 0         |      |         Memory Controller 1        |      |         Memory Controller 2         |
-|                                     |      |                                    |      |                                     |
-+-------------------------------------+      +------------------------------------+      +-------------------------------------+
++-------------------------+       +-------------------------+        +-------------------------+
+|                         |       |                         |        |                         |
+|   Memory Controller 0   |       |   Memory Controller 1   |        |   Memory Controller 2   |
+|                         |       |                         |        |                         |
++-------------------------+       +-------------------------+        +-------------------------+
 
 ----
 
@@ -58,9 +58,9 @@ Globally all of the QoS Controllers implement 64 RCIDs and 256 MCIDs.
 Name(\RQSC, Package()
 {
     "RQSC",         // Signature
-    0x000000FF,     // Total Length of RQSC Table (to be fixed)
+    0x00000148,     // Total Length of RQSC Table (328 bytes)
     0x01,           // Revision
-    0xFF,           // Checksum (to be fixed)
+    0xFF,           // Checksum (placeholder, to be fixed)
     "RIVOS ",       // OEMID
     "RVOS    ",     // OEM Table ID
     0x00000001,     // OEM Revision
@@ -71,7 +71,7 @@ Name(\RQSC, Package()
     {
         0x00,           // Controller Type - Capacity
         0x00,           // Reserved
-        0xFFFF,         // Length (to be fixed)
+        44,             // Length
         Package()       // Register Interface Address
         {
             0x00,                   // System Memory Space
@@ -87,8 +87,11 @@ Name(\RQSC, Package()
         Package()       // Resource Structure - Cluster 0 L2 Cache
         {
             0x00,                   // Resource Type (Cache)
-            0x0F,                   // Length (16 bytes)
+            0x00,                   // Reserved Byte
+            20,                     // Length (20 bytes)
             0x0000,                 // Resource Flags
+            0x00,                   // Reserved Byte
+            0x00,                   // Resource ID Type (Processor Cache)
             0x0000000000000000,     // Resource ID 1 (Cache ID from PPTT)
             0x00000000,             // Resource ID 2 (0)
         },
@@ -97,7 +100,7 @@ Name(\RQSC, Package()
     {
         0x00,           // Controller Type - Capacity
         0x00,           // Reserved
-        0xFFFF,         // Length (to be fixed)
+        44,             // Length
         Package()       // Register Interface Address
         {
             0x00,                   // System Memory Space
@@ -113,8 +116,11 @@ Name(\RQSC, Package()
         Package()       // Resource Structure - Cluster 1 L2 Cache
         {
             0x00,                   // Resource Type (Cache)
-            0x0F,                   // Length (16 bytes)
+            0x00,                   // Reserved Byte
+            20,                     // Length (20 bytes)
             0x0000,                 // Resource Flags
+            0x00,                   // Reserved Byte
+            0x00,                   // Resource ID Type (Processor Cache)
             0x0000000000000001,     // Resource ID 1 (Cache ID from PPTT)
             0x00000000,             // Resource ID 2 (0)
         },
@@ -123,7 +129,7 @@ Name(\RQSC, Package()
     {
         0x00,           // Controller Type - Capacity
         0x00,           // Reserved
-        0xFFFF,         // Length (to be fixed)
+        44,             // Length
         Package()       // Register Interface Address
         {
             0x00,                   // System Memory Space
@@ -139,8 +145,11 @@ Name(\RQSC, Package()
         Package()       // Resource Structure - Shared LLC Cache
         {
             0x00,                   // Resource Type (Cache)
-            0x0F,                   // Length (16 bytes)
+            0x00,                   // Reserved Byte
+            20,                     // Length (20 bytes)
             0x0000,                 // Resource Flags
+            0x00,                   // Reserved Byte
+            0x00,                   // Resource ID Type (Processor Cache)
             0x0000000000000002,     // Resource ID 1 (Cache ID from PPTT)
             0x00000000,             // Resource ID 2 (0)
         },
@@ -149,7 +158,7 @@ Name(\RQSC, Package()
     {
         0x01,           // Controller Type - Bandwidth
         0x00,           // Reserved
-        0xFFFF,         // Length (to be fixed)
+        52,             // Length
         Package()       // Register Interface Address
         {
             0x00,                   // System Memory Space
@@ -165,17 +174,21 @@ Name(\RQSC, Package()
         Package()       // Resource Structure - Proximity Domain
         {
             0x01,                   // Resource Type (Memory)
-            0x0F,                   // Length (16 bytes)
+            0x00,                   // Reserved Byte
+            28,                     // Length (28 bytes)
             0x0000,                 // Resource Flags
+            0x00,                   // Reserved Byte
+            0x01,                   // Resource ID Type (Memory Range)
             0x0000000000000000,     // Resource ID 1 (Proximity Domain from SRAT table for this memory)
             0x00000000,             // Resource ID 2 (0)
+            0x0000000000000000,     // Resource Specific Data (No bandwidth per block data reported)
         },
     },
     Package()       // QoS Controller 5 - Memory Controller 1 Bandwidth QoS Controller
     {
         0x01,           // Controller Type - Bandwidth
         0x00,           // Reserved
-        0xFFFF,         // Length (to be fixed)
+        52,             // Length
         Package()       // Register Interface Address
         {
             0x00,                   // System Memory Space
@@ -191,17 +204,21 @@ Name(\RQSC, Package()
         Package()       // Resource Structure - Proximity Domain
         {
             0x01,                   // Resource Type (Memory)
-            0x0F,                   // Length (16 bytes)
+            0x00,                   // Reserved Byte
+            28,                     // Length (28 bytes)
             0x0000,                 // Resource Flags
+            0x00,                   // Reserved Byte
+            0x01,                   // Resource ID Type (Memory Range)
             0x0000000000000000,     // Resource ID 1 (Proximity Domain from SRAT table for this memory)
             0x00000000,             // Resource ID 2 (0)
+            0x0000000000000000,     // Resource Specific Data (No bandwidth per block data reported)
         },
     },
     Package()       // QoS Controller 6 - Memory Controller 2 Bandwidth QoS Controller
     {
         0x01,           // Controller Type - Bandwidth
         0x00,           // Reserved
-        0xFFFF,         // Length (to be fixed)
+        52,             // Length
         Package()       // Register Interface Address
         {
             0x00,                   // System Memory Space
@@ -217,10 +234,14 @@ Name(\RQSC, Package()
         Package()       // Resource Structure - Proximity Domain
         {
             0x01,                   // Resource Type (Memory)
-            0x0F,                   // Length (16 bytes)
+            0x00,                   // Reserved Byte
+            28,                     // Length (28 bytes)
             0x0000,                 // Resource Flags
+            0x00,                   // Reserved Byte
+            0x01,                   // Resource ID Type (Memory Range)
             0x0000000000000000,     // Resource ID 1 (Proximity Domain from SRAT table for this memory)
             0x00000000,             // Resource ID 2 (0)
+            0x0000000000000000,     // Resource Specific Data (No bandwidth per block data reported)
         },
     },
 })

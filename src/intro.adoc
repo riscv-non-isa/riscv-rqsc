@@ -1,16 +1,25 @@
 [[intro]]
 == Introduction
 
-This document describes the specification for the ACPI description of the RISC-V Quality of Service Controller Register Interfaces for OSPM level configuration and control of Quality of Service features.
+This document describes the specification for the ACPI cite:[ACPI] description of the RISC-V Quality of Service Controller Register Interfaces for OSPM level configuration and control of Quality of Service features.
 
 === Terminology
 
 [cols="<1,<2",options="header"]
 |===
 ^|Term         ^|Description
+|ACPI           |Advanced Configuration and Power Interface
 |CBQRI          |Capacity and Bandwidth Controller QoS Register Interface
-|RCID           |Resource Control Identifier
+|HMAT           |Hardware Memory Affinity Table
 |MCID           |Monitoring Counter Identifier
-|UMA            |Uniform Memory Access
 |NUMA           |Non-Uniform Memory Access
+|OSPM           |Operating System Power Manager
+|PPTT           |Processor Properties Topology Table
+|QoS            |Quality of Service
+|RCID           |Resource Control Identifier
+|RISC           |Reduced Instruction Set Computer
+|RQSC           |RISC-V Quality of Service Controller
+|SRAT           |System Resource Affinity Table
+|UMA            |Uniform Memory Access
+
 |===
