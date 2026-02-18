@@ -106,7 +106,7 @@ The structure of the RQSC is described in <<RQSC_TABLE>>.
 
                                            - 0 - Capacity
                                            - 1 - Bandwidth
-                                           - 2-0x7F - Reserved
+                                           - 2-0x7F - Reserved for future standard use
                                            - 0x80-0xFF - Designated for Vendor specific use
 <|- Reserved                    |1  |1  <a|Reserved. Must be 0
 <|- Length                      |2  |2  <a|Length of the Quality of Service
