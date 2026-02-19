@@ -40,7 +40,7 @@ The following directories are used to organize the contents of this repo:
 To build the document, you'll need the following tools installed on your system:
 
 * Make
-* asciiDoctor-pdf, asciidoctor-bibtex, asciidoctor-diagram, and asciidoctor-mathematical
+* asciidoctor-pdf, asciidoctor-bibtex, asciidoctor-diagram, and asciidoctor-mathematical
 * Docker
 
 === Cloning the Repository
@@ -95,7 +95,7 @@ pre-commit install
 
 Rather than doing the above `pre-commit install` in every repo that uses it, you can do it https://pre-commit.com/#automatically-enabling-pre-commit-on-repositories[once on your system.]
 
-When enabling additional checks https://pre-commit.com/#plugins[by editing .pre-commit-config.yaml], it is recommended running the newly added check on all files in the repository. This can be done with the following command:
+When enabling additional checks https://pre-commit.com/#plugins[by editing .pre-commit-config.yaml], it is recommended to run the newly added check on all files in the repository. This can be done with the following command:
 
 .Running all pre-commit hooks on all files
 [source,shell]

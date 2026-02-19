@@ -1,8 +1,5 @@
 == Contributors
 
-This RISC-V specification has been contributed to directly or indirectly by:
+This RISC-V specification has been contributed to directly or indirectly by (in alphabetical order):
 
-[%hardbreaks]
-* Vasudevan Srinivasan <vasu@rivosinc.com>
-* Ved Shanbogue <ved@rivosinc.com>
-* PRS TG <tech-prs@lists.riscv.org>
+Vasudevan Srinivasan, Ved Shanbogue
