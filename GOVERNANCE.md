@@ -1,8 +1,8 @@
 # Governance
-This project for the template specification is governed by the Documentation SIG.
+This project is governed by the Platform Runtime Services TG, part of Privilived Software HC.
 
-The group can be joined by RISC-V members at: https://lists.riscv.org/g/sig-documentation.
+These groups can be joined by RISC-V members at: https://lists.riscv.org/g/tech-prs and https://lists.riscv.org/g/privileged-software.
 
-Mailing list archives are available at: https://lists.riscv.org/g/sig-documentation/topics.
+Mailing list archives are available at: https://lists.riscv.org/g/tech-prs/topics and https://lists.riscv.org/g/privileged-software/topics.
 
-**_NOTE:_** PROJECTS BUILT USING THE TEMPLATE SHOULD UPDATE THE ABOVE TEXT AS-NEEDED.
+Community meetings schedule at: https://tech.riscv.org/calendar.

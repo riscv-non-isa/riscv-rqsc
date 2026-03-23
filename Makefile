@@ -17,7 +17,7 @@ DOCS := \
 
 DATE ?= $(shell date +%Y-%m-%d)
 VERSION ?= v0.9.2
-REVMARK ?= Draft
+REVMARK ?= Stable
 DOCKER_IMG := ghcr.io/riscv/riscv-docs-base-container-image:latest
 ifneq ($(SKIP_DOCKER),true)
 	DOCKER_CMD := docker run --rm -v ${PWD}:/build -w /build \
