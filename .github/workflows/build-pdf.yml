@@ -14,7 +14,7 @@ on:
           - Stable
           - Frozen
           - Ratified
-        default: Development
+        default: Frozen
       prerelease:
         description: Tag as a pre-release?
         required: false
