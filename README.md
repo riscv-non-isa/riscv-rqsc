@@ -1,28 +1,28 @@
-= RISC-V Quality of Service Controllers Table (RQSC) ACPI Specification
+# RISC-V Quality of Service Controllers Table (RQSC) ACPI Specification
 
-== License
+## License
 
 This work is licensed under a Creative Commons Attribution 4.0 International License (CC-BY-4.0). For details, see the link:LICENSE[LICENSE] file.
 
-== Maintainers
+## Maintainers
 
 The list of maintainers of this specification is maintained in the link:MAINTAINERS.md[MAINTAINERS] file.
 
-== Contributors
+## Contributors
 
 The list of contributors to this specification is maintained in the link:src/contributors.adoc[contributors] file.
 
 For guidelines on how to contribute, refer to the link:CONTRIBUTING.md[CONTRIBUTING] file.
 
-== Governance
+## Governance
 
 The governance for this project is defined in the link:GOVERNANCE.md[GOVERNANCE] file.
 
 Community information, including meeting (if held) and mailing lists are detailed in this file.
 
-== Building the Document
+## Building the Document
 
-=== Directory Structure
+### Directory Structure
 
 The following directories are used to organize the contents of this repo:
 
@@ -31,7 +31,7 @@ The following directories are used to organize the contents of this repo:
 * `src/`: source files for the specification
 * `build/`: default directory where the build artifacts are generated
 
-=== Prerequisites
+### Prerequisites
 
 To build the document, you'll need the following tools installed on your system:
 
@@ -39,18 +39,18 @@ To build the document, you'll need the following tools installed on your system:
 * asciidoctor-pdf, asciidoctor-bibtex, asciidoctor-diagram, and asciidoctor-mathematical
 * Docker
 
-=== Cloning the Repository
+### Cloning the Repository
 
 ```shell
-git clone --recurse-submodules https://github.com/riscv/docs-spec-template.git
+git clone --recurse-submodules https://github.com:riscv-non-isa/riscv-rqsc.git
 ```
 
-=== Building the Documentation
+### Building the Documentation
 
-To start the build process, run:
+To start the build process, navigate to riscv-rqsc folder and run:
 
 ```shell
-cd ./docs-spec-template && make build
+cd ./riscv-rqsc && make build
 ```
 
 The link:Makefile[] script will check the availability of Docker on your system:
@@ -62,7 +62,7 @@ The documentation is generated from the AsciiDoctor source files in your project
 
 The build process utilizes several options, including theming and font settings, and generates a PDF document as output.
 
-=== Cleaning up
+### Cleaning up
 
 To clean up the generated files, run:
 
@@ -70,31 +70,29 @@ To clean up the generated files, run:
 make clean
 ```
 
-== Enabling pre-commit checks locally
+## Enabling pre-commit checks locally
 
 The repository has some basic commit checks set up with https://pre-commit.com/[pre-commit] that will be enforced by the GitHub CI.
 To ensure these checks are also run in the local repository while making changes the following can be done:
 
 .Installing pre-commit tool
-[source,shell]
-----
+```shell
 # Do once on your system
 pip3 install pre-commit
-----
+```
+
 
 .Installing pre-commit git hook in repo
-[source,shell]
-----
+```shell
 # Do once in local repo
 pre-commit install
-----
+```
 
 Rather than doing the above `pre-commit install` in every repo that uses it, you can do it https://pre-commit.com/#automatically-enabling-pre-commit-on-repositories[once on your system.]
 
 When enabling additional checks https://pre-commit.com/#plugins[by editing .pre-commit-config.yaml], it is recommended to run the newly added check on all files in the repository. This can be done with the following command:
 
 .Running all pre-commit hooks on all files
-[source,shell]
-----
+```shell
 pre-commit run --all-files
-----
+```
