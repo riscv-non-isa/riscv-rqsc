@@ -1,0 +1,14 @@
+name: rqsc
+title: QoS Controllers Table
+version: v1.0
+nav:
+- modules/ROOT/nav.adoc
+
+asciidoc:
+  attributes:
+    page-group: platform-software
+    asamBibliography: 'ROOT:resources/riscv_rqsc.bib'
+    page-card-description: 'Defines the ACPI interface for OSPM configuration and control of QoS controller features.'
+    page-release-date: 'June 2026'
+    page-pdf_url: _attachments/riscv-rqsc.pdf
+    more_details_url: https://riscv.atlassian.net/wiki/external/NGVhZDQ2MzY3MzZkNGE1MWIxYTYyMWM5N2Y2NTFjZjA
