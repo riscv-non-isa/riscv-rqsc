@@ -25,6 +25,10 @@ on:
         required: false
         type: boolean
         default: false
+      version:
+        description: 'Optional: explicit version (e.g. 1.0.0). Overrides auto-increment.'
+        required: false
+        type: string
   pull_request:
   push:
     branches:
@@ -55,7 +59,10 @@ jobs:
       # Override VERSION and REVMARK for manual workflow dispatch
       - name: Update environment variables
         run: |
-          echo "VERSION=v${{ steps.version.outputs.version }}" >> "$GITHUB_ENV"
+          VER="${{ github.event.inputs.version }}"
+          if [ -z "$VER" ]; then VER="${{ steps.version.outputs.version }}"; fi
+          echo "VERSION=v$VER" >> "$GITHUB_ENV"
+          echo "RELVER=$VER" >> "$GITHUB_ENV"
           echo "REVMARK=${{ github.event.inputs.revision_mark }}" >> "$GITHUB_ENV"
         if: github.event_name == 'workflow_dispatch'
 
@@ -76,8 +83,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ${{ github.workspace }}/build/*.pdf
-          tag_name: v${{ steps.version.outputs.version }}
-          name: Release ${{ steps.version.outputs.version }}
+          tag_name: v${{ env.RELVER }}
+          name: Release ${{ env.RELVER }}
           draft: ${{ github.event.inputs.draft }}
           prerelease: ${{ github.event.inputs.prerelease }}
         env:
